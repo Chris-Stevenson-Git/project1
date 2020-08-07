@@ -45,3 +45,39 @@ u3.recipes << r3
 
 puts "Created #{Recipe.count} recipes."
 puts Recipe.pluck(:title).join(', ')
+
+
+puts ''
+puts 'Creating Comments...'
+
+Comment.destroy_all
+
+c1 = Comment.create!(
+  comment: 'Looking good!',
+  like_count: 0,
+  image: '',
+)
+
+c2 = Comment.create!(
+  comment: 'Meh.',
+  like_count: 0,
+  image: '',
+)
+
+c3 = Comment.create!(
+  comment: 'Hot singles in your area. Sign up today at www.annoyingbotad.com',
+  like_count: 0,
+  image: '',
+)
+
+c4 = Comment.create!(
+  comment: 'Yum!',
+  like_count: 0,
+  image: '',
+)
+
+r1.comments << c1 << c4
+r2.comments << c2
+r3.comments << c3
+
+puts "Created #{Comment.count} comments."
