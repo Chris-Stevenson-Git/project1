@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Recipebook</title>
+    <title>recipebook</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,17 @@
   </head>
 
   <body>
+    <nav>
+      <% if @current_user.present? %>
+        <span>Hello <%= @current_username %></span>
+        <%= link_to 'Logout', login_path, method: 'delete' %>
+      <% else %>
+        <%= link_to 'Login',  login_path %>
+        |
+        <%= link_to 'Sign Up', new_user_path %>
+      <% end %>
+    </nav>
+
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,16 @@
+<h2>Login Page</h2>
+
+<%# Show an error ONCE if there is one %>
+<% if flash[:error] %>
+  <%= flash[:error] %>
+<% end %>
+
+<%= form_tag login_path do %>
+  <%= label_tag :email %>
+  <%= email_field_tag :email %>
+  <br>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+  <br>
+  <%= submit_tag 'Log Me in!'%>
+<% end %>
