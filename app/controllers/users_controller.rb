@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = User.create user_params
 
     #if the creation was successful
-    if @user.presisted?
+    if @user.persisted?
       session[:user_id] = @user.id
       redirect_to home_path
     else

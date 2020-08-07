@@ -76,8 +76,15 @@ c4 = Comment.create!(
   image: '',
 )
 
+puts "Linking comments to recipes..."
+
 r1.comments << c1 << c4
 r2.comments << c2
 r3.comments << c3
+
+puts "Linking comments to users..."
+
+u2.comments << c1 << c2
+u3.comments << c3 << c4
 
 puts "Created #{Comment.count} comments."
