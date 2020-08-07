@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-#CRUD for users
+#CRUD
 resources :users
 resources :recipes
+resources :comments
 
 
 end
