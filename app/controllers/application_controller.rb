@@ -18,7 +18,6 @@ class ApplicationController < ActionController::Base
   #Function to work out how long since a database entry was created
   def since_time(create_time)
     time_dif = Time.now.to_i - create_time.to_i
-    puts time_dif
     time_key = {
       'Y' => 31536000,
       'M' => 2628000,

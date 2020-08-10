@@ -15,6 +15,8 @@
         <span>Hello <%= @current_user.name %></span>
         |
         <%= link_to 'Logout', login_path, method: 'delete' %>
+        <br>
+        <%= link_to 'New Recipe', new_recipe_path %>
       <% else %>
         <%= link_to 'Login',  login_path %>
         |

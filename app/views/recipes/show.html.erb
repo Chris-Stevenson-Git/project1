@@ -1,4 +1,9 @@
 <h1><%= @recipe.title %></h1>
+<% if @recipe.user_id == @current_user.id  %>
+  <%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %> |
+  <%= link_to 'Delete Recipe', recipe_path(@recipe), method: 'delete' %>
+<% end %>
+
 
 <h3>Author: <%= @recipe.user.name %></h3>
 

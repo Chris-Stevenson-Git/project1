@@ -1,0 +1,12 @@
+<%= form_for @recipe do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br>
+  <%= f.label :method, "Instructions" %>
+  <%= f.text_field :method %>
+  <br>
+  <%= f.label :image, "Image URL" %>
+  <%= f.text_field :image %>
+  <br>
+  <%= f.submit 'Post my recipe!' %>
+<% end %>
