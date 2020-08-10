@@ -88,3 +88,6 @@ u2.comments << c1 << c2
 u3.comments << c3 << c4
 
 puts "Created #{Comment.count} comments."
+
+
+# Ingredients seeds below
