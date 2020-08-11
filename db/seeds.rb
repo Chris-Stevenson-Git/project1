@@ -91,3 +91,44 @@ puts "Created #{Comment.count} comments."
 
 
 # Ingredients seeds below
+Ingredient.destroy_all
+
+puts 'Creating Ingredients....'
+i1 = Ingredient.create!(product: 'Burger Patty')
+i2 = Ingredient.create!(product: 'Burger Bun')
+i3 = Ingredient.create!(product: 'Lettuce')
+i4 = Ingredient.create!(product: 'Tomato Sauce')
+
+puts "Created #{Ingredient.count} ingredients"
+puts Ingredient.pluck(:product).join(', ')
+
+#Linking ingredients to recipe items
+
+RecipeItem.destroy_all
+
+ri1 = RecipeItem.create!(quantity: 1)
+ri2 = RecipeItem.create!(quantity: 2)
+ri3 = RecipeItem.create!(quantity: 100, unit: 'grams')
+ri4 = RecipeItem.create!(quantity: 50, unit: 'ml')
+
+ri1.ingredients << i1
+ri2.ingredients << i2
+ri3.ingredients << i3
+ri4.ingredients << i4
+
+#Linking recipe list to recipe
+
+r1.recipe_items << ri1 << ri2 << ri3 << ri4
+
+
+#shopping lists
+
+puts ''
+puts 'Creating Shopping Lists...'
+
+ShoppingList.destroy_all
+
+sl1 = ShoppingList.create!(name: 'Groceries')
+
+puts "Created #{ShoppingList.count} shopping lists"
+puts ShoppingList.pluck(:name).join(', ')

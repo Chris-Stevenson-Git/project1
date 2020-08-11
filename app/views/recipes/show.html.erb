@@ -9,6 +9,13 @@
 
 <p>Posted <%= @timestamp %></p>
 
+<h3>Ingredients</h3>
+<ul>
+  <% @recipe.recipe_items.each do |item| %>
+    <li><%= item.ingredients.first.product %> x <%= item.quantity %> <%= item.unit %></li>
+  <% end %>
+</ul>
+
 <h3>Instructions: </h3>
 <p><%= @recipe.method %></p>
 
