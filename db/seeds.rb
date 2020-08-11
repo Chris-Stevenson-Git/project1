@@ -114,10 +114,10 @@ ri2 = RecipeItem.create!(quantity: 2)
 ri3 = RecipeItem.create!(quantity: 100, unit: 'grams')
 ri4 = RecipeItem.create!(quantity: 50, unit: 'ml')
 
-ri1.ingredients << i1
-ri2.ingredients << i2
-ri3.ingredients << i3
-ri4.ingredients << i4
+i1.recipe_items << ri1
+i2.recipe_items << ri2
+i3.recipe_items << ri3
+i4.recipe_items << ri4
 
 #Linking recipe list to recipe
 
@@ -140,4 +140,13 @@ puts ShoppingList.pluck(:name).join(', ')
 #User one gets the shopping list
 u1.shopping_lists << sl1
 
-sl1.recipe_items << ri3 << ri4
+puts "Creating Shopping List Items..."
+sli1 = ShoppingListItem.create!(quantity: 2, unit: 'Litres')
+sli2 = ShoppingListItem.create!(quantity: 5, unit: 'Grams')
+sli3 = ShoppingListItem.create!(quantity: 90, unit: 'Kilograms')
+
+i1.shopping_list_items << sli1
+i2.shopping_list_items << sli2
+i3.shopping_list_items << sli3
+
+sl1.shopping_list_items << sli1 << sli2 << sli3

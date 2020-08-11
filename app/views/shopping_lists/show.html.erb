@@ -1,9 +1,6 @@
 <h1><%= @shopping_list.name %></h1>
-
 <ul>
-  <% @shopping_list.recipe_items.each do |item| %>
-    <% item.ingredients.each do |ingredient| %>
-      <li><%= ingredient.product %></li>
-    <% end %>
+  <% @shopping_list.shopping_list_items.each do |item| %>
+    <li><%= item.ingredient.product %> x <%= item.quantity %> <%= item.unit %></li>
   <% end %>
 </ul>
