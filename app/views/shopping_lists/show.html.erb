@@ -1,0 +1,9 @@
+<h1><%= @shopping_list.name %></h1>
+
+<ul>
+  <% @shopping_list.recipe_items.each do |item| %>
+    <% item.ingredients.each do |ingredient| %>
+      <li><%= ingredient.product %></li>
+    <% end %>
+  <% end %>
+</ul>

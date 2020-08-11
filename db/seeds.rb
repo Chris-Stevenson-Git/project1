@@ -19,6 +19,7 @@ Recipe.destroy_all
 
 r1 = Recipe.create!(
   title: "Chris's Burgers",
+  description: 'A simple burger recipe',
   method: 'Do this, do that, then do the third thing',
   like_count: 0,
   image: 'https://www.helpguide.org/wp-content/uploads/fast-foods-candy-cookies-pastries-768.jpg',
@@ -26,6 +27,7 @@ r1 = Recipe.create!(
 
 r2 = Recipe.create!(
   title: "Chris's Taco Supreme",
+  description: 'Super cool taco recipe',
   method: "Taco taco, burrito burrito, taco taco. Even though I don't got a lot of money, I give you taco flavoured kisses honey. Fufill all your weeshes with my taco flavoured keeeeeseees",
   like_count: 0,
   image: 'https://images-gmi-pmc.edge-generalmills.com/e59f255c-7498-4b84-9c9d-e578bf5d88fc.jpg',
@@ -33,6 +35,7 @@ r2 = Recipe.create!(
 
 r3 = Recipe.create!(
   title: "Zara's Pizza",
+  description: 'Pepperoni pizza including how to make the dough from scratch',
   method: "I'll have mine p-p-p-pepperoni! I'll have mine vuh-vuh-vuh-vicodin!",
   like_count: 0,
   image: 'https://www.delonghi.com/Global/recipes/multifry/pizza_fresca.jpg',
@@ -130,5 +133,11 @@ ShoppingList.destroy_all
 
 sl1 = ShoppingList.create!(name: 'Groceries')
 
+
 puts "Created #{ShoppingList.count} shopping lists"
 puts ShoppingList.pluck(:name).join(', ')
+
+#User one gets the shopping list
+u1.shopping_lists << sl1
+
+sl1.recipe_items << ri3 << ri4

@@ -1,12 +1,13 @@
-<%= form_for @recipe do |f| %>
+<%= form_for @recipe, html: {multipart: true} do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
   <br>
   <%= f.label :method, "Instructions" %>
-  <%= f.text_field :method %>
+  <%= f.text_area :method %>
   <br>
   <%= f.label :image, "Image URL" %>
-  <%= f.text_field :image %>
+  <%# <%= f.text_field :image %> %>
+  <%= f.cl_image_upload :image %>
   <br>
   <%= f.submit 'Post my recipe!' %>
 <% end %>

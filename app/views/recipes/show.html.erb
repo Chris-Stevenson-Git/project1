@@ -19,7 +19,7 @@
 <h3>Instructions: </h3>
 <p><%= @recipe.method %></p>
 
-<%= image_tag @recipe.image %>
+<%= cl_image_tag @recipe.image %>
 
 <% @recipe.comments.each do |comment| %>
   <h5><%= comment.user.name %>:</h5>

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
 #root routes
 root to: 'pages#welcome'
 get '/home' => 'pages#home'
@@ -13,6 +12,7 @@ delete '/login' => 'session#destroy' #logout
 resources :users
 resources :recipes
 resources :comments
+resources :shopping_lists
 
 
 end

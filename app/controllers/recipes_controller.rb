@@ -5,13 +5,17 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new recipe_params
+    if params[:file].present?
+      response = Cloudinary::Uploader.upload params[:file]
+      @recipe.image = response['public_id']
+    end
     @recipe.user_id = @current_user.id
     @recipe.save
     redirect_to recipe_path(@recipe)
   end
 
   def index
-    @recipes = Recipe.all
+    @recipes = @current_user.recipes.all
   end
 
   def show

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_11_020729) do
+ActiveRecord::Schema.define(version: 2020_08_11_073907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,11 @@ ActiveRecord::Schema.define(version: 2020_08_11_020729) do
     t.text "unit"
   end
 
+  create_table "recipe_items_shopping_lists", force: :cascade do |t|
+    t.integer "recipe_item_id"
+    t.integer "shopping_list_id"
+  end
+
   create_table "recipes", force: :cascade do |t|
     t.text "method"
     t.integer "like_count"
@@ -48,13 +53,18 @@ ActiveRecord::Schema.define(version: 2020_08_11_020729) do
     t.datetime "updated_at", null: false
     t.text "title"
     t.integer "user_id"
+    t.text "description"
   end
 
   create_table "shopping_lists", force: :cascade do |t|
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "shopping_lists_users", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "shopping_list_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,7 +74,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_020729) do
     t.text "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "shopping_list_id"
   end
 
 end
