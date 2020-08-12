@@ -139,11 +139,6 @@ class RecipesController < ApplicationController
         end
         # If there is no recipe item
         if the_recipe_item_id == nil
-          puts '********************************************'
-          puts '********************************************'
-          puts ingredients[i]
-          puts '********************************************'
-          puts '********************************************'
           if ingredients[i] != ''
             RecipeItem.create!(
               recipe_id: recipe.id,
@@ -183,13 +178,6 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(:title, :description, :method, :image, ingredients:[:id, :product], recipe_items_attributes:[:id, :quantity, :unit])
   end
 
-  def add_ingredients_to_db(ingredient)
-    if Ingredient.find_by(product: ingredient) == nil
-      item = Ingredient.create!(product: ingredient)
-      item.id
-    else
-      Ingredient.find_by(product: ingredient).id
-    end
-  end #add ingredeints function
+
 
 end

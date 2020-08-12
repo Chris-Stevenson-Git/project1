@@ -10,13 +10,8 @@
   <%= text_field_tag :email, nil, placeholder: 'email address' %>
   <%= submit_tag 'Share' %>
 <% end %>
-
-<ul>
-  <% @shopping_list.shopping_list_items.each do |item| %>
-    <li><%= item.ingredient.product %> x <%= item.quantity %> <%= item.unit %></li>
-  <% end %>
-</ul>
-<%= form_for(@shopping_list, :as => :shopping_list, :url => update_ingredients_path, class: 'shopping_list_form') do |f| %>
+<br>
+<%= form_for(@shopping_list, :as => :shopping_list, :url => shopping_list_path(@shopping_list.id), class: 'shopping_list_form') do |f| %>
 <%= f.submit 'Save' %>
 <br>
   <% @shopping_list.shopping_list_items.each do |item| %>

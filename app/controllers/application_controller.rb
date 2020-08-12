@@ -51,4 +51,14 @@ class ApplicationController < ActionController::Base
     end
   end#since_time
 
+  def add_ingredients_to_db(ingredient)
+    if Ingredient.find_by(product: ingredient) == nil
+      item = Ingredient.create!(product: ingredient)
+      item.id
+    else
+      Ingredient.find_by(product: ingredient).id
+    end
+  end #add ingredeints function
+
+
 end#ApplicationController
