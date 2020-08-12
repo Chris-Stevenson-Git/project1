@@ -12,7 +12,7 @@
 
 <% @recipes.each do |recipe| %>
   <div class="recipe_home">
-    <span><%= recipe.title %></span>
+    <span><%= link_to recipe.title, recipe_path(recipe.id) %></span>
     |
     <span>Author: <%= recipe.user.name %></span>
     <p><%= recipe.description %></p>

@@ -25,6 +25,7 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find params[:id]
+    @ingredients = Ingredient.all
     if @recipe.user.id != @current_user.id
       redirect_to home_path
     end

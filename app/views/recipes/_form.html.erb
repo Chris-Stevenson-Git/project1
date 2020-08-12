@@ -1,12 +1,35 @@
+<script type="text/javascript">
+</script>
+
+
 <%= form_for @recipe, html: {multipart: true} do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
   <br>
+  <%= f.label :method, "Description" %>
+  <%= f.text_area :description, placeholder: 'Enter a short, snappy description for your meal!' %>
+  <br>
+  <%= f.label :recipe_item, 'Ingredients' %>
+  <div class="ingredients">
+    <%= f.fields_for :ingredients do |ingredient| %>
+    <%= ingredient.text_field :product%>
+    <br>
+    <% end %>
+  </div>
+  <div class="ingredients">
+    <%= f.fields_for :recipe_items do |item| %>
+      <%= item.text_field :quantity %>
+      <%= item.text_field :unit %>
+      <br>
+    <% end %>
+  </div>
+  <br>
   <%= f.label :method, "Instructions" %>
   <%= f.text_area :method %>
   <br>
-  <%= f.label :image, "Image URL" %>
-  <%# <%= f.text_field :image %> %>
+  <%= f.label :image, "Image:" %>
+  <%= f.text_field :image, placeholder: 'Enter image URL' %>
+  <span>OR</span>
   <%= f.cl_image_upload :image %>
   <br>
   <%= f.submit 'Post my recipe!' %>

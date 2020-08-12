@@ -6,6 +6,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'jquery' %>
     <%= javascript_include_tag 'application' %>
 
     <%= cloudinary_js_config %>
@@ -19,6 +20,8 @@
           |
           <%= link_to 'Logout', login_path, method: 'delete' %>
           <br>
+          <%= link_to 'Home', home_path %>
+          |
           <%= link_to 'My Recipes', recipes_path %>
           |
           <%= link_to 'My Shopping Lists', shopping_lists_path %>
