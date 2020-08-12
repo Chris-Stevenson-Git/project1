@@ -1,0 +1,9 @@
+<h1>Add a Description</h1>
+<h3>Something snappy that will make people want to click on your post!</h3>
+<%= form_for(@recipe, :as => :recipe, :url => update_desc_path) do |f| %>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  <%= f.submit 'Next' %>
+<% end %>
+
+<%= render partial: 'preview' %>

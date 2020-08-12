@@ -1,0 +1,9 @@
+<h1>Add Instructions</h1>
+<h3>Add your full and detailed instructions on how to craft this masterpiece</h3>
+<%= form_for(@recipe, :as => :recipe, :url => update_method_path) do |f| %>
+  <%= f.label :method %>
+  <%= f.text_area :method %>
+  <%= f.submit 'Next' %>
+<% end %>
+
+<%= render partial: 'preview' %>

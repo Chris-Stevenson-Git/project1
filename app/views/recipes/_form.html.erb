@@ -1,6 +1,3 @@
-<script type="text/javascript">
-</script>
-
 
 <%= form_for @recipe, html: {multipart: true} do |f| %>
   <%= f.label :title %>
@@ -9,28 +6,20 @@
   <%= f.label :method, "Description" %>
   <%= f.text_area :description, placeholder: 'Enter a short, snappy description for your meal!' %>
   <br>
-  <%= f.label :recipe_item, 'Ingredients' %>
+  <%= f.label :product, 'Ingredients' %>
+
   <div class="ingredients">
-    <%= f.fields_for :ingredients do |ingredient| %>
-    <%= ingredient.text_field :product%>
-    <br>
-    <% end %>
-  </div>
-  <div class="ingredients">
-    <%= f.fields_for :recipe_items do |item| %>
-      <%= item.text_field :quantity %>
-      <%= item.text_field :unit %>
+    <% (0..14).each do |i| %>
+      <%= text_field_tag 'ingredients[]', @recipe.ingredients.pluck(:product)[i], placeholder: 'Ingredient'%>
+      <%= text_field_tag 'quantaties[]', @recipe.recipe_items.pluck(:quantity)[i], placeholder: 'Quantity' %>
+      <%= select_tag 'units[]', options_for_select(['', 'grams', 'kg', 'ml', 'L'], @recipe.recipe_items.pluck(:unit)[i]) %>
       <br>
     <% end %>
-  </div>
+  <br>
+
   <br>
   <%= f.label :method, "Instructions" %>
   <%= f.text_area :method %>
   <br>
-  <%= f.label :image, "Image:" %>
-  <%= f.text_field :image, placeholder: 'Enter image URL' %>
-  <span>OR</span>
-  <%= f.cl_image_upload :image %>
-  <br>
-  <%= f.submit 'Post my recipe!' %>
+  <%= f.submit 'Submit Edit' %>
 <% end %>

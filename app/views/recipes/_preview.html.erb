@@ -1,0 +1,27 @@
+<hr>
+<h2>Preview: </h2>
+
+<h1><%= @recipe.title %></h1>
+
+<h3>Author: <%= @recipe.user.name %></h3>
+
+<h3>Description</h3>
+<p><%= @recipe.description %></p>
+
+<h3>Ingredients</h3>
+<ul>
+  <% @recipe.recipe_items.each do |item| %>
+    <li><%= item.ingredient.product %> x <%= item.quantity %> <%= item.unit %></li>
+  <% end %>
+</ul>
+
+<h3>Instructions: </h3>
+<p><%= @recipe.method %></p>
+
+<%= cl_image_tag @recipe.image %>
+
+<% @recipe.comments.each do |comment| %>
+  <h5><%= comment.user.name %>:</h5>
+  <p><%= comment.comment %></p>
+  <hr>
+<% end %>

@@ -1,0 +1,8 @@
+<h1>Upload an Image</h1>
+<%= form_for(@recipe, html: {multipart: true}, :as => :recipe, :url => update_image_path) do |f| %>
+  <%= f.cl_image_upload :image %>
+  <%= f.submit 'Next' %>
+<% end %>
+<h4>Or <%= link_to 'Click Here', new_image_path %> to go back and provide a URL.</h4>
+
+<%= render partial: 'preview' %>
