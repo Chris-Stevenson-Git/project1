@@ -25,5 +25,7 @@ get '/recipes/new/image/:id' => 'recipes#add_image', as: 'new_image'
 get '/recipes/new/ul_image/:id' => 'recipes#add_image_upload', as: 'new_ul_image'
 patch '/recipes/new/image/:id' => 'recipes#update_image', as: 'update_image'
 
+#Add User to shopping List
+post '/shopping_lists/:id' => 'shopping_lists#add_user', as: 'add_user_to_shopping_list'
 
 end

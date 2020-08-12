@@ -1,6 +1,48 @@
 <h1><%= @shopping_list.name %></h1>
+<h3>This list is shared with...</h3>
+<ul>
+  <% @shopping_list.users.pluck(:name).each do |name| %>
+    <li><%= name %></li>
+  <% end %>
+</ul>
+<h4>Add a friend!</h4>
+<%= form_tag url_for(action: 'add_user', method: "post") do %>
+  <%= text_field_tag :email, nil, placeholder: 'email address' %>
+  <%= submit_tag 'Share' %>
+<% end %>
+
 <ul>
   <% @shopping_list.shopping_list_items.each do |item| %>
     <li><%= item.ingredient.product %> x <%= item.quantity %> <%= item.unit %></li>
   <% end %>
 </ul>
+<%= form_for(@shopping_list, :as => :shopping_list, :url => update_ingredients_path, class: 'shopping_list_form') do |f| %>
+<%= f.submit 'Save' %>
+<br>
+  <% @shopping_list.shopping_list_items.each do |item| %>
+    <%= text_field_tag 'ingredients[]', item.ingredient.product, placeholder: 'Ingredient'%>
+    <%= text_field_tag 'quantaties[]', item.quantity, placeholder: 'Quantity' %>
+    <%= select_tag 'units[]', options_for_select(['', 'grams', 'kg', 'ml', 'L'], item.unit) %>
+    <br>
+  <% end %>
+<% end %>
+<div class="new_items">
+
+</div>
+<button id="add_item">Add Item</button>
+
+
+<script type="text/javascript">
+  $('#add_item').click(function(){
+    $('.edit_shopping_list').append("<input type='text' name='ingredients[]' placeholder='Item'>");
+    $('.edit_shopping_list').append("<input type='text' name='quantaties[]' placeholder='Quantity'>");
+    $('.edit_shopping_list').append(`<select name='units[]'>
+      <option value=""></option>
+      <option value="grams">grams</option>
+      <option value="kg">kg</option>
+      <option value="ml">ml</option>
+      <option value="L">L</option>
+    </select>`);
+    $('.edit_shopping_list').append("<br>");
+  });
+</script>

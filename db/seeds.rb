@@ -141,9 +141,9 @@ puts ShoppingList.pluck(:name).join(', ')
 u1.shopping_lists << sl1
 
 puts "Creating Shopping List Items..."
-sli1 = ShoppingListItem.create!(quantity: 2, unit: 'Litres')
-sli2 = ShoppingListItem.create!(quantity: 5, unit: 'Grams')
-sli3 = ShoppingListItem.create!(quantity: 90, unit: 'Kilograms')
+sli1 = ShoppingListItem.create!(quantity: 2, unit: 'L')
+sli2 = ShoppingListItem.create!(quantity: 5, unit: 'grams')
+sli3 = ShoppingListItem.create!(quantity: 90, unit: 'kg')
 
 i1.shopping_list_items << sli1
 i2.shopping_list_items << sli2
