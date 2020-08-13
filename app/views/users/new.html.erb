@@ -1,26 +1,34 @@
-<h2>Create Account Page</h2>
-
-<% if @user.errors.full_messages.any? %>
-  <p>ERROR</p>
-  <ul>
-    <% @user.errors.full_messages.each do |e| %>
+<div class="login_signup_page">
+  <div class="portal">
+    <% if @user.errors.full_messages.any? %>
+    <p>ERROR</p>
+    <ul>
+      <% @user.errors.full_messages.each do |e| %>
       <li><%= e %></li>
+      <% end %>
+    </ul>
     <% end %>
-  </ul>
-<% end %>
+    <h2>Sign Up</h2>
 
-<%= form_for @user do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <br>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <br>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <br>
-  <%= f.label :password_confirmation, "Confirm Password" %>
-  <%= f.password_field :password_confirmation %>
-  <br>
-  <%= f.submit 'Sign Up' %>
-<% end %>
+    <%= form_for @user do |f| %>
+    <%= f.label :name %>
+    <br>
+    <%= f.text_field :name %>
+    <br>
+    <%= f.label :email %>
+    <br>
+    <%= f.text_field :email %>
+    <br>
+    <%= f.label :password %>
+    <br>
+    <%= f.password_field :password %>
+    <br>
+    <%= f.label :password_confirmation, "Confirm Password" %>
+    <br>
+    <%= f.password_field :password_confirmation %>
+    <br>
+    <%= f.submit 'Sign Up' %>
+    <% end %>
+
+  </div>
+</div>

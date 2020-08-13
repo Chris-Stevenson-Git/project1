@@ -1,31 +1,46 @@
-<h1><%= @recipe.title %></h1>
-<% if @recipe.user_id == @current_user.id  %>
-  <%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %> |
-  <%= link_to 'Delete Recipe', recipe_path(@recipe), method: 'delete' %>
-<% end %>
+<div class="content_container">
+  <div class="recipe_show">
+    <h1 class='heading'><%= @recipe.title %></h1>
+    <div id='link_container'>
+      <% if @recipe.user_id == @current_user.id  %>
+      <%= link_to 'Edit', edit_recipe_path(@recipe) %>
+      <%= link_to 'Delete', recipe_path(@recipe), method: 'delete' %>
+      <% end %>
+    </div>
 
+    <div class="recipe_container">
+      <h3>Author: <%= @recipe.user.name %></h3>
 
-<h3>Author: <%= @recipe.user.name %></h3>
+      <p>Posted <%= @timestamp %></p>
 
-<p>Posted <%= @timestamp %></p>
+      <h3>Description</h3>
+      <p><%= @recipe.description %></p>
 
-<h3>Description</h3>
-<p><%= @recipe.description %></p>
+      <h3>Ingredients</h3>
+      <ul>
+        <% @recipe.recipe_items.each do |item| %>
+          <li><%= item.ingredient.product %> x <%= item.quantity %> <%= item.unit %></li>
+        <% end %>
+      </ul>
 
-<h3>Ingredients</h3>
-<ul>
-  <% @recipe.recipe_items.each do |item| %>
-    <li><%= item.ingredient.product %> x <%= item.quantity %> <%= item.unit %></li>
-  <% end %>
-</ul>
+      <h3>Instructions: </h3>
+      <p><%= @recipe.method %></p>
 
-<h3>Instructions: </h3>
-<p><%= @recipe.method %></p>
+      <%= cl_image_tag @recipe.image %>
+    </div>
 
-<%= cl_image_tag @recipe.image %>
+    <div class="comments_container">
+      <% @recipe.comments.each do |comment| %>
+      <div class="comment">
+        <h5><%= comment.user.name %>:</h5>
+        <p><%= comment.comment %></p>
+      </div>
+      <% end %>
 
-<% @recipe.comments.each do |comment| %>
-  <h5><%= comment.user.name %>:</h5>
-  <p><%= comment.comment %></p>
-  <hr>
-<% end %>
+      <%= form_tag url_for(action: 'add_comment', method: "post") do %>
+      <%= text_field_tag :comment, nil, placeholder: 'Leave a comment...' %>
+      <%= submit_tag 'Post' %>
+      <% end %>
+    </div>
+  </div>
+</div>

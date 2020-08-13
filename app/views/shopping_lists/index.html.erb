@@ -1,7 +1,13 @@
-<h1>Hi <%= @current_user.name %>! These are your shopping lists!</h1>
+<div class="content_container">
+  <h1 class='heading'>Shopping Lists</h1>
+  <div class="shopping_lists_index">
+    <h2>Hi <%= @current_user.name %>! These are your shopping lists!</h2>
 
-<ul>
-  <% @current_user.shopping_lists.each do |list| %>
-  <li><%= link_to list.name, shopping_list_path(list.id) %></li>
-  <% end %>
-</ul>
+    <ul>
+      <% @current_user.shopping_lists.each do |list| %>
+      <li><%= link_to list.name, shopping_list_path(list.id) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+</div>

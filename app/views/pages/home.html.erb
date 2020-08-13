@@ -1,20 +1,11 @@
-<h1>Home Page!</h1>
-
-<h3>I need this page to be a social media style page with</h3>
-<ul>
-  <li>Recipe Titles</li>
-  <li>Recipe Author</li>
-  <li>Recipe Thumbnail</li>
-  <li>Recipe Description</li>
-</ul>
-
-<h4>It'd be dope to also have a sidebar which linked to shopping lists and showed how many items each held</h4>
-
-<% @recipes.each do |recipe| %>
-  <div class="recipe_home">
-    <span><%= link_to recipe.title, recipe_path(recipe.id) %></span>
-    |
-    <span>Author: <%= recipe.user.name %></span>
-    <p><%= recipe.description %></p>
+<div class="content_container">
+  <h1 class='heading'>Recipes</h1>
+  <% @recipes.each do |recipe| %>
+  <div class="recipe_item">
+    <%= link_to image_tag(recipe.image), recipe_path(recipe.id) %>
+    <p class='title'><%= link_to recipe.title, recipe_path(recipe.id) %></p>
+    <p class='author'>Author: <%= recipe.user.name %></p>
+    <p class='description'><%= recipe.description %></p>
   </div>
-<% end %>
+  <% end %>
+</div>

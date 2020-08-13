@@ -1,31 +1,37 @@
-<h1><%= @shopping_list.name %></h1>
-<h3>This list is shared with...</h3>
-<ul>
-  <% @shopping_list.users.pluck(:name).each do |name| %>
-    <li><%= name %></li>
-  <% end %>
-</ul>
-<h4>Add a friend!</h4>
-<%= form_tag url_for(action: 'add_user', method: "post") do %>
-  <%= text_field_tag :email, nil, placeholder: 'email address' %>
-  <%= submit_tag 'Share' %>
-<% end %>
-<br>
-<%= form_for(@shopping_list, :as => :shopping_list, :url => shopping_list_path(@shopping_list.id), class: 'shopping_list_form') do |f| %>
-<%= f.submit 'Save' %>
-<br>
-  <% @shopping_list.shopping_list_items.each do |item| %>
-    <%= text_field_tag 'ingredients[]', item.ingredient.product, placeholder: 'Ingredient'%>
-    <%= text_field_tag 'quantaties[]', item.quantity, placeholder: 'Quantity' %>
-    <%= select_tag 'units[]', options_for_select(['', 'grams', 'kg', 'ml', 'L'], item.unit) %>
+<div class="content_container">
+  <h1 class='heading'><%= @shopping_list.name %></h1>
+  <div class="shopping_list_show">
+    <h3>This list is shared with...</h3>
+    <ul>
+      <% @shopping_list.users.pluck(:name).each do |name| %>
+        <% if name == @current_user.name %>
+          <% name = 'You' %>
+        <% end %>
+        <li><%= name %></li>
+      <% end %>
+    </ul>
+    <h4>Add a friend!</h4>
+    <%= form_tag url_for(action: 'add_user', method: "post") do %>
+      <%= text_field_tag :email, nil, placeholder: 'email address' %>
+      <%= submit_tag 'Share' %>
+    <% end %>
     <br>
-  <% end %>
-<% end %>
-<div class="new_items">
+    <%= form_for(@shopping_list, :as => :shopping_list, :url => shopping_list_path(@shopping_list.id), class: 'shopping_list_form') do |f| %>
+    <%= f.submit 'Save Changes' %>
+    <br>
+      <% @shopping_list.shopping_list_items.each do |item| %>
+        <%= text_field_tag 'ingredients[]', item.ingredient.product, placeholder: 'Ingredient'%>
+        <%= text_field_tag 'quantaties[]', item.quantity, placeholder: 'Quantity' %>
+        <%= select_tag 'units[]', options_for_select(['', 'grams', 'kg', 'ml', 'L'], item.unit) %>
+        <br>
+      <% end %>
+    <% end %>
+    <div class="new_items">
 
+    </div>
+    <button id="add_item">Add Item</button>
+  </div>
 </div>
-<button id="add_item">Add Item</button>
-
 
 <script type="text/javascript">
   $('#add_item').click(function(){

@@ -4,36 +4,7 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new recipe_params
-    if params[:file].present?
-      response = Cloudinary::Uploader.upload params[:file]
-      @recipe.image = response['public_id']
-    end
-    @recipe.user_id = @current_user.id
-    @recipe.save
-    redirect_to new_desc_path(@recipe)
-  end
-
-  def add_desc
-    @recipe = Recipe.find params[:id]
-  end
-
-  def update_desc
-    recipe = Recipe.find params[:id]
-    if recipe.user.id == @current_user.id
-      recipe.update recipe_params
-      redirect_to new_ingredients_path(recipe)
-    else
-      redirect_to home_path
-    end
-  end
-
-  def add_ingredients
-    @recipe = Recipe.find params[:id]
-  end
-
-  def update_ingredients
-    recipe = Recipe.find params[:id]
+    @recipe = Recipe.create! recipe_params
     ingredients = params[:ingredients]
     quantaties = params[:quantaties]
     units = params[:units]
@@ -42,55 +13,21 @@ class RecipesController < ApplicationController
       id = add_ingredients_to_db(i)
       ingredient_ids.push(id)
     end
-    (0..14).each do |i|
-      if ingredients[i] == ''
-        next
-      else
-        RecipeItem.create!(
-          recipe_id: recipe.id,
-          ingredient_id: ingredient_ids[i],
-          quantity: quantaties[i],
-          unit: units[i]
-        )
-      end
+    (0..ingredients.length-1).each do |i|
+          RecipeItem.create!(
+            recipe_id: @recipe.id,
+            ingredient_id: ingredient_ids[i],
+            quantity: quantaties[i],
+            unit: units[i]
+          )
     end
-    if recipe.user.id == @current_user.id
-      redirect_to new_method_path(recipe)
-    else
-      redirect_to home_path
+    if params[:file].present?
+      response = Cloudinary::Uploader.upload params[:file]
+      @recipe.image = response['public_id']
     end
-  end
-
-  def add_method
-    @recipe = Recipe.find params[:id]
-  end
-
-  def update_method
-    recipe = Recipe.find params[:id]
-    if recipe.user.id == @current_user.id
-      recipe.update recipe_params
-      redirect_to new_image_path(recipe)
-    else
-      redirect_to home_path
-    end
-  end
-
-  def add_image
-    @recipe = Recipe.find params[:id]
-  end
-
-  def add_image_upload
-    @recipe = Recipe.find params[:id]
-  end
-
-  def update_image
-    recipe = Recipe.find params[:id]
-    if recipe.user.id == @current_user.id
-      recipe.update recipe_params
-      redirect_to recipe_path(recipe)
-    else
-      redirect_to home_path
-    end
+    @recipe.user_id = @current_user.id
+    @recipe.save
+    redirect_to recipe_path(@recipe.id)
   end
 
   def index
@@ -121,43 +58,22 @@ class RecipesController < ApplicationController
         id = add_ingredients_to_db(i)
         ingredient_ids.push(id)
       end
-
-      # Loop through all 15 items
-      (0..14).each do |i|
-        # set recipe_item_id to the correct ID
-        if RecipeItem.find_by(ingredient_id: recipe.ingredients.pluck(:id)[i]) != nil
-          the_recipe_item_id = RecipeItem.find_by(ingredient_id: recipe.ingredients.pluck(:id)[i]).id
-        else
-          the_recipe_item_id = nil
-        end
-        # check if the new ingredient item exists in the DB
-        the_ingredient = Ingredient.find_by(product: ingredients[i])
-
-        # if it doesn't exist in the DB then create it
-        if the_ingredient == nil
-          the_ingredient = Ingredient.create!(product: ingredient)
-        end
-        # If there is no recipe item
-        if the_recipe_item_id == nil
-          if ingredients[i] != ''
+      recipe.recipe_items.destroy_all
+      # Loop through all recipe items
+      (0..ingredients.length-1).each do |i|
             RecipeItem.create!(
               recipe_id: recipe.id,
-              ingredient_id: the_ingredient.id,
+              ingredient_id: ingredient_ids[i],
               quantity: quantaties[i],
               unit: units[i]
             )
-          else
-            next
-          end
-        else
-          RecipeItem.find_by(id: the_recipe_item_id).update(
-            ingredient_id: the_ingredient.id,
-            quantity: quantaties[i],
-            unit: units[i]
-          )
-        end
       end
       recipe.update recipe_params
+      if params[:file].present?
+        response = Cloudinary::Uploader.upload params[:file]
+        recipe.image = response['public_id']
+        recipe.save
+      end
       redirect_to recipe_path(recipe)
     else
       redirect_to home_path
@@ -170,6 +86,13 @@ class RecipesController < ApplicationController
       recipe.destroy
     end
     redirect_to home_path
+  end
+
+  def add_comment
+    recipe = Recipe.find params[:id]
+    comment = Comment.create!(comment: params[:comment], user_id: @current_user.id)
+    recipe.comments << comment
+    redirect_to recipe_path(recipe)
   end
 
   private

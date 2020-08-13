@@ -1,15 +1,12 @@
-<div class="recipe_list">
-  <h2>Your Recipes</h2>
-
-  <ul>
-    <% @recipes.each do |recipe| %>
-    <li>
-      <%= link_to recipe.title, recipe_path(recipe.id) %>
-    </li>
-    <% end %>
-  </ul>
-</div>
-
-<div class="new_recipe">
-  <%= link_to 'New Recipe', new_recipe_path %>
+<div class="content_container">
+  <h1 class='heading'>Your Recipes</h1>
+  <%= link_to 'Post a New Recipe', new_recipe_path, class: 'new_recipe_button' %>
+  <% @recipes.each do |recipe| %>
+  <div class="recipe_item">
+    <%= link_to image_tag(recipe.image), recipe_path(recipe.id) %>
+    <p class='title'><%= link_to recipe.title, recipe_path(recipe.id) %></p>
+    <p class='author'>Author: <%= recipe.user.name %></p>
+    <p class='description'><%= recipe.description %></p>
+  </div>
+  <% end %>
 </div>

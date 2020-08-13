@@ -1,26 +1,62 @@
+<div class="recipe_form">
+  <%= form_for @recipe, html: {multipart: true} do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <br>
+    <%= f.label :method, "Description" %>
+    <%= f.text_area :description, placeholder: 'Enter a short, snappy description for your meal!' %>
+    <br>
 
-<%= form_for @recipe, html: {multipart: true} do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <br>
-  <%= f.label :method, "Description" %>
-  <%= f.text_area :description, placeholder: 'Enter a short, snappy description for your meal!' %>
-  <br>
-
-  <%= f.label :product, 'Ingredients' %>
-
-  <div class="ingredients">
-    <% (0..14).each do |i| %>
+    <%= f.label :product, 'Ingredients' %>
+    <br>
+    <div class="ingredient_list">
+      <% (0..@recipe.recipe_items.length-1).each do |i| %>
       <%= text_field_tag 'ingredients[]', @recipe.ingredients.pluck(:product)[i], placeholder: 'Ingredient'%>
       <%= text_field_tag 'quantaties[]', @recipe.recipe_items.pluck(:quantity)[i], placeholder: 'Quantity' %>
       <%= select_tag 'units[]', options_for_select(['', 'grams', 'kg', 'ml', 'L'], @recipe.recipe_items.pluck(:unit)[i]) %>
       <br>
-    <% end %>
-  <br>
+      <% end %>
+    </div>
+    <p id="add_item">Add Item</p>
+    <br>
+    <%= f.label :image %>
+    <div class="image_form_tag">
+      <div class="image_button">
+        <button id="url_button">I have an Image URL</button>
+        <span id='span_remove'> Or </span>
+        <span id="cloudinary_tag">
+          <%= f.cl_image_upload :image %>
+        </span>
+      </div>
 
-  <br>
-  <%= f.label :method, "Instructions" %>
-  <%= f.text_area :method %>
-  <br>
-  <%= f.submit 'Submit Edit' %>
-<% end %>
+    </div>
+    <br>
+    <%= f.label :method, "Instructions" %>
+    <%= f.text_area :method %>
+    <br>
+    <%= f.submit 'Post' %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $('#url_button').click(function(){
+    $('.image_button').remove();
+    $('.image_form_tag').append(`<input type='text' name='recipe[image]' placeholder='Image URL'>`);
+  });
+  $('#cloudinary_tag').click(function(){
+    $('#url_button').remove();
+    $('#span_remove').remove();
+  });
+  $('#add_item').click(function(){
+    $('.ingredient_list').append("<input type='text' name='ingredients[]' placeholder='Ingredient'>");
+    $('.ingredient_list').append("<input type='text' name='quantaties[]' placeholder='Quantity'>");
+    $('.ingredient_list').append(`<select name='units[]'>
+      <option value=""></option>
+      <option value="grams">grams</option>
+      <option value="kg">kg</option>
+      <option value="ml">ml</option>
+      <option value="L">L</option>
+    </select>`);
+    $('.ingredient_list').append("<br>");
+  });
+</script>
