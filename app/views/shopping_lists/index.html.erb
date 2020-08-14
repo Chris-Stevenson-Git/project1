@@ -8,6 +8,12 @@
       <li><%= link_to list.name, shopping_list_path(list.id) %></li>
       <% end %>
     </ul>
+    <hr>
+    <p>Or Add a new Shopping List</p>
+    <%= form_tag url_for(action: 'create', method: "post") do %>
+      <%= text_field_tag :name, nil, placeholder: 'Your List Name...' %>
+      <%= submit_tag 'Create' %>
+    <% end %>
   </div>
 
 </div>

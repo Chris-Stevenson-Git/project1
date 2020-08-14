@@ -3,6 +3,9 @@ class ShoppingListsController < ApplicationController
   end
 
   def create
+    shopping_list = ShoppingList.create!(name: params[:name])
+    @current_user.shopping_lists << shopping_list
+    redirect_to shopping_lists_path
   end
 
   def index
