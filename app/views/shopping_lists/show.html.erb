@@ -19,10 +19,14 @@
     <%= form_for(@shopping_list, :as => :shopping_list, :url => shopping_list_path(@shopping_list.id), class: 'shopping_list_form') do |f| %>
     <%= f.submit 'Save Changes' %>
     <br>
+    <% count = 0 %>
+    <p>Item | Quantity | Unit | Delete</p>
       <% @shopping_list.shopping_list_items.each do |item| %>
         <%= text_field_tag 'ingredients[]', item.ingredient.product, placeholder: 'Ingredient'%>
         <%= text_field_tag 'quantaties[]', item.quantity, placeholder: 'Quantity' %>
         <%= select_tag 'units[]', options_for_select(['', 'grams', 'kg', 'ml', 'L'], item.unit) %>
+        <%= check_box_tag 'delete[]', count %>
+        <% count += 1 %>
         <br>
       <% end %>
     <% end %>
@@ -34,6 +38,7 @@
 </div>
 
 <script type="text/javascript">
+  let i = <%= @shopping_list.shopping_list_items.length %>
   $('#add_item').click(function(){
     $('.edit_shopping_list').append("<input type='text' name='ingredients[]' placeholder='Item'>");
     $('.edit_shopping_list').append("<input type='text' name='quantaties[]' placeholder='Quantity'>");
@@ -44,6 +49,8 @@
       <option value="ml">ml</option>
       <option value="L">L</option>
     </select>`);
+    $('.edit_shopping_list').append(`<input type='checkbox' name='delete[]', value=${i}>`)
     $('.edit_shopping_list').append("<br>");
+    i++;
   });
 </script>
