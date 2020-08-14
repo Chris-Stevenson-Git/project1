@@ -98,6 +98,13 @@ class RecipesController < ApplicationController
     redirect_to recipe_path(recipe)
   end
 
+  def add_items_to_list
+    recipe = Recipe.find params[:id]
+    recipe_items = recipe.recipe_items
+    shopping_list = @current_user.shopping_lists.find_by(name: params[:list])
+    redirect_to shopping_list_path(shopping_list.id)
+  end
+
   private
 
   def recipe_params

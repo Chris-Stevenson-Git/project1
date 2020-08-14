@@ -23,6 +23,13 @@
         <% end %>
       </ul>
 
+      <h3>Add these ingredients to: </h3>
+      <%= form_tag url_for(action: 'add_comment', method: "post") do %>
+        <%= select_tag 'list', options_for_select(@current_user.shopping_lists.pluck(:name)) %>
+        <%= submit_tag 'Add' %>
+      <% end %>
+
+
       <h3>Instructions: </h3>
       <p><%= @recipe.method %></p>
 
