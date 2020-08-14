@@ -24,7 +24,7 @@
       </ul>
 
       <h3>Add these ingredients to: </h3>
-      <%= form_tag url_for(action: 'add_comment', method: "post") do %>
+      <%= form_tag({controller: "shopping_lists", action: "add_items_to_list"}, method: "post") do %>
         <%= select_tag 'list', options_for_select(@current_user.shopping_lists.pluck(:name)) %>
         <%= submit_tag 'Add' %>
       <% end %>

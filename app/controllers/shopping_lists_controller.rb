@@ -60,4 +60,20 @@ class ShoppingListsController < ApplicationController
 
   def destroy
   end
+
+  def add_items_to_list
+    recipe = Recipe.find params[:id]
+    recipe_items = recipe.recipe_items
+    shopping_list = @current_user.shopping_lists.find_by(name: params[:list])
+    recipe_items.each do |i|
+          ShoppingListItem.create!(
+            shopping_list_id: shopping_list.id,
+            ingredient_id: i.ingredient_id,
+            quantity: i.quantity,
+            unit: i.unit
+          )
+    end
+    redirect_to shopping_list_path(shopping_list.id)
+  end
+
 end

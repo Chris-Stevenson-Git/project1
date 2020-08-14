@@ -20,4 +20,6 @@ post '/shopping_lists/:id' => 'shopping_lists#add_user', as: 'add_user_to_shoppi
 #add comment to recipe
 post '/recipes/:id' => 'recipes#add_comment'
 
+post '/shopping_lists/:id/add_item' => 'shopping_lists#add_items_to_list', as: 'add_items_to_list'
+
 end
