@@ -20,7 +20,7 @@ Recipe.destroy_all
 r1 = Recipe.create!(
   title: "Chris's Burgers",
   description: 'A simple burger recipe',
-  method: 'Do this, do that, then do the third thing',
+  method: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
   like_count: 0,
   image: 'https://www.helpguide.org/wp-content/uploads/fast-foods-candy-cookies-pastries-768.jpg',
 )
@@ -68,7 +68,7 @@ c2 = Comment.create!(
 )
 
 c3 = Comment.create!(
-  comment: 'Hot singles in your area. Sign up today at www.annoyingbotad.com',
+  comment: 'This looks terrible.',
   like_count: 0,
   image: '',
 )
