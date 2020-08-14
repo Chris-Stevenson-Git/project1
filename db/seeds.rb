@@ -101,6 +101,10 @@ i1 = Ingredient.create!(product: 'Burger Patty')
 i2 = Ingredient.create!(product: 'Burger Bun')
 i3 = Ingredient.create!(product: 'Lettuce')
 i4 = Ingredient.create!(product: 'Tomato Sauce')
+i5 = Ingredient.create!(product: 'Milk')
+i6 = Ingredient.create!(product: 'Flour')
+i7 = Ingredient.create!(product: 'Toilet Paper')
+i8 = Ingredient.create!(product: 'Toothpaste')
 
 puts "Created #{Ingredient.count} ingredients"
 puts Ingredient.pluck(:product).join(', ')
@@ -142,11 +146,13 @@ u1.shopping_lists << sl1
 
 puts "Creating Shopping List Items..."
 sli1 = ShoppingListItem.create!(quantity: 2, unit: 'L')
-sli2 = ShoppingListItem.create!(quantity: 5, unit: 'grams')
-sli3 = ShoppingListItem.create!(quantity: 90, unit: 'kg')
+sli2 = ShoppingListItem.create!(quantity: 500, unit: 'grams')
+sli3 = ShoppingListItem.create!(quantity: 12, unit: '')
+sli4 = ShoppingListItem.create!(quantity: 1, unit: '')
 
-i1.shopping_list_items << sli1
-i2.shopping_list_items << sli2
-i3.shopping_list_items << sli3
+i5.shopping_list_items << sli1
+i6.shopping_list_items << sli2
+i7.shopping_list_items << sli3
+i8.shopping_list_items << sli4
 
 sl1.shopping_list_items << sli1 << sli2 << sli3
