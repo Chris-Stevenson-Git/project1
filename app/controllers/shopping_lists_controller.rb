@@ -21,7 +21,10 @@ class ShoppingListsController < ApplicationController
       ingredients = params[:ingredients]
       quantaties = params[:quantaties]
       units = params[:units]
-      delete = params[:delete]
+      delete = ['dummy']
+      if params[:delete].present?
+        delete = params[:delete]
+      end
       ingredient_ids = []
       ingredients.each do |i|
         id = add_ingredients_to_db(i)
