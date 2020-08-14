@@ -155,4 +155,4 @@ i6.shopping_list_items << sli2
 i7.shopping_list_items << sli3
 i8.shopping_list_items << sli4
 
-sl1.shopping_list_items << sli1 << sli2 << sli3
+sl1.shopping_list_items << sli1 << sli2 << sli3 << sli4
