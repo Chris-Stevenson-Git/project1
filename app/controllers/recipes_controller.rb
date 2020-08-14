@@ -53,6 +53,7 @@ class RecipesController < ApplicationController
       ingredients = params[:ingredients]
       quantaties = params[:quantaties]
       units = params[:units]
+      delete = params[:delete]
       ingredient_ids = []
       ingredients.each do |i|
         id = add_ingredients_to_db(i)
@@ -61,12 +62,14 @@ class RecipesController < ApplicationController
       recipe.recipe_items.destroy_all
       # Loop through all recipe items
       (0..ingredients.length-1).each do |i|
+          unless delete.include?(i.to_s)
             RecipeItem.create!(
               recipe_id: recipe.id,
               ingredient_id: ingredient_ids[i],
               quantity: quantaties[i],
               unit: units[i]
             )
+          end
       end
       recipe.update recipe_params
       if params[:file].present?

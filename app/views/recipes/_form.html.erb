@@ -10,10 +10,13 @@
     <%= f.label :product, 'Ingredients' %>
     <br>
     <div class="ingredient_list">
+      <p>Ingredient | Quantity | Unit | Delete</p>
       <% (0..@recipe.recipe_items.length-1).each do |i| %>
       <%= text_field_tag 'ingredients[]', @recipe.ingredients.pluck(:product)[i], placeholder: 'Ingredient'%>
       <%= text_field_tag 'quantaties[]', @recipe.recipe_items.pluck(:quantity)[i], placeholder: 'Quantity' %>
       <%= select_tag 'units[]', options_for_select(['', 'grams', 'kg', 'ml', 'L'], @recipe.recipe_items.pluck(:unit)[i]) %>
+      <%= check_box_tag 'delete[]', i %>
+
       <br>
       <% end %>
     </div>
@@ -39,6 +42,7 @@
 </div>
 
 <script type="text/javascript">
+  let i = <%= @recipe.recipe_items.length %>
   $('#url_button').click(function(){
     $('.image_button').remove();
     $('.image_form_tag').append(`<input type='text' name='recipe[image]' placeholder='Image URL'>`);
@@ -57,6 +61,8 @@
       <option value="ml">ml</option>
       <option value="L">L</option>
     </select>`);
+    $('.ingredient_list').append(`<input type='checkbox' name='delete[]', value=${i}>`)
     $('.ingredient_list').append("<br>");
+    i++;
   });
 </script>
