@@ -21,6 +21,7 @@ class ShoppingListsController < ApplicationController
       ingredients = params[:ingredients]
       quantaties = params[:quantaties]
       units = params[:units]
+      delete = ['dummy']
       delete = params[:delete]
       ingredient_ids = []
       ingredients.each do |i|
